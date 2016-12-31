@@ -5,6 +5,7 @@
 // 初期化テスト
 // サイズ計算テスト
 // 通常使用ユースケース
+// バッファ不足テスト
 
 
 #include <iostream>
@@ -56,7 +57,7 @@ TEST_F(AbstractDataMemoryTest, サイズ計算テスト)
     EXPECT_EQ( AbstDataMem_alloc_size(), sizeof( struct abst_data_mem_s ) + DummyAbst_size() );
 }
 
-TEST_F(AbstractDataMemoryTest, 通常使用ユースケース)
+TEST_F(AbstractDataMemoryTest, 通常使用ケース)
 {
     AbstDataMem_add_size( DummyAbst_size() );
     
@@ -72,6 +73,28 @@ TEST_F(AbstractDataMemoryTest, 通常使用ユースケース)
     EXPECT_EQ( da->b, 1);
     EXPECT_FLOAT_EQ( da->c, 2.0f );
     EXPECT_DOUBLE_EQ( da->d, 3.0 );
+}
+
+TEST_F(AbstractDataMemoryTest, 複数データ使用ケース)
+{
+    AbstDataMem_add_size( DummyAbst_size() );
+    AbstDataMem_add_size( DummyAbst_size() );
+    
+    char* buf = (char*)malloc( AbstDataMem_alloc_size() );
+    
+    AbstDataMem adm = AbstDataMem_init( buf, AbstDataMem_alloc_size() );
+    
+    DummyAbst da = (DummyAbst)AbstDataMem_get_data( adm, DummyAbst_size() );
+    DummyAbst da2 = (DummyAbst)AbstDataMem_get_data( adm, DummyAbst_size() );
+    
+    //DummyAbst_init( da );
+    DummyAbst_init( da2 );
+    
+    EXPECT_NE( da, da2 );
+    EXPECT_EQ( da2->a, 0);
+    EXPECT_EQ( da2->b, 1);
+    EXPECT_FLOAT_EQ( da2->c, 2.0f );
+    EXPECT_DOUBLE_EQ( da2->d, 3.0 );
 }
 
 TEST_F(AbstractDataMemoryTest, getdataバッファ不足)
@@ -106,7 +129,7 @@ TEST_F(AbstractDataMemoryTest, 残りサイズ計算ゼロ)
 TEST_F(AbstractDataMemoryTest, 残りサイズ計算マイナスはゼロにする)
 {
     struct abst_data_mem_s adm_s;
-    adm_s.buf_size = adm_s.header_size = sizeof( struct abst_data_mem_s );
+    adm_s.buf_size = adm_s.header_size = AbstDataMem_struct_size();
     adm_s.used_size = 1u;
     
     EXPECT_EQ( AbstDataMem_remain_size( &adm_s ), 0u );
@@ -114,7 +137,7 @@ TEST_F(AbstractDataMemoryTest, 残りサイズ計算マイナスはゼロにす�
 
 TEST_F(AbstractDataMemoryTest, 構造体サイズ計算)
 {
-    
+    EXPECT_EQ( AbstDataMem_struct_size(), sizeof(struct abst_data_mem_s) );
 }
 
 TEST(GeneralTest, 符号なし計算)
@@ -135,7 +158,7 @@ TEST(GeneralTest, sizeof挙動)
     EXPECT_EQ( sizeof(alc), sizeof(char*) );
 }
 
-TEST_F(AbstractDataMemoryTest, 絶対成功テスト)
+TEST(GeneralTest, 絶対成功テスト)
 {
     SUCCEED();
 }
