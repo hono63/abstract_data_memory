@@ -14,7 +14,7 @@ struct abst_data_mem_s{
     size_t  used_size;
 };
 
-AbstDataMem AbstDataMem_init( void* buf, size_t buf_size )
+AbstDataMem AbstDataMem_init( const void* buf, size_t buf_size )
 {
     AbstDataMem adm = (AbstDataMem)buf;
     

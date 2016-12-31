@@ -60,6 +60,17 @@ TEST_F(AbstractDataMemoryTest, 通常使用ユースケース)
     EXPECT_DOUBLE_EQ( da->d, 3.0 );
 }
 
+TEST_F(AbstractDataMemoryTest, バッファ不足)
+{
+    char* buf = (char*)malloc( AbstDataMem_alloc_size() );
+    
+    AbstDataMem adm = AbstDataMem_init( buf, sizeof(buf));
+    
+    DummyAbst da = (DummyAbst)AbstDataMem_get_data( adm, DummyAbst_size() );
+    
+    ASSERT_FALSE( da );
+}
+
 TEST_F(AbstractDataMemoryTest, 絶対成功テスト)
 {
     SUCCEED();
