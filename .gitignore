@@ -36,3 +36,7 @@ obj/*
 *.exe
 *.out
 *.app
+
+# Xcode
+*.1
+
