@@ -9,16 +9,31 @@
 #include "abstract_data_memory.h"
 
 struct abst_data_mem_s{
-    size_t  size;
+    size_t  buf_size;
+    size_t  header_size;
+    size_t  used_size;
 };
 
-AbstDataMem AbstDataMem_init( void* buf, size_t size )
+AbstDataMem AbstDataMem_init( void* buf, size_t buf_size )
 {
     AbstDataMem adm = (AbstDataMem)buf;
     
-    adm->size = size;
+    adm->buf_size = buf_size;
+    adm->header_size = sizeof( struct abst_data_mem_s );
+    adm->used_size = 0u;
     
     return adm;
+}
+
+void* AbstDataMem_get_data( const AbstDataMem adm, size_t data_size )
+{
+    unsigned char* p;
+    
+    p = (unsigned char*)adm + adm->header_size + adm->used_size;
+    
+    adm->used_size += data_size;
+    
+    return (void*)p;
 }
 
 // utility
@@ -27,7 +42,7 @@ static size_t g_alloc_size = 0u;
 
 void    AbstDataMem_clear_alloc_size()
 {
-    g_alloc_size = 0u;
+    g_alloc_size = sizeof( struct abst_data_mem_s );
 }
 
 void    AbstDataMem_add_size( size_t data_size )

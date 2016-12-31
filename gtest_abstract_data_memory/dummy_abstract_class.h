@@ -14,5 +14,6 @@
 typedef struct dummy_abst_s* DummyAbst;
 
 size_t DummyAbst_size();
+void DummyAbst_init( DummyAbst da );
 
 #endif

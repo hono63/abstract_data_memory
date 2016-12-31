@@ -19,3 +19,11 @@ size_t DummyAbst_size()
 {
     return sizeof( struct dummy_abst_s );
 }
+
+void DummyAbst_init( DummyAbst da )
+{
+    da->a = 0;
+    da->b = 1;
+    da->c = 2.0f;
+    da->d = 3.0;
+}

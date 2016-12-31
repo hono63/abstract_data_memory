@@ -4,6 +4,7 @@
 // あらかじめ確保済みのメモリを渡して、それに対してデータを割り当てる。
 // 初期化テスト
 // サイズ計算テスト
+// 通常使用ユースケース
 
 
 #include <iostream>
@@ -15,6 +16,7 @@
 class AbstractDataMemoryTest : public ::testing::Test{
 protected:
     AbstractDataMemoryTest(){
+        AbstDataMem_clear_alloc_size();
     }
     virtual ~AbstractDataMemoryTest(){
     }
@@ -30,14 +32,32 @@ TEST_F(AbstractDataMemoryTest, 初期化テスト)
     
     AbstDataMem adm = AbstDataMem_init( buf, sizeof(buf) );
     
-    EXPECT_EQ( adm->size, sizeof(buf) );
+    EXPECT_EQ( adm->buf_size, sizeof(buf) );
 }
 
 TEST_F(AbstractDataMemoryTest, サイズ計算テスト)
 {
     AbstDataMem_add_size( DummyAbst_size() );
     
-    EXPECT_EQ( AbstDataMem_alloc_size(), DummyAbst_size() );
+    EXPECT_EQ( AbstDataMem_alloc_size(), sizeof( struct abst_data_mem_s ) + DummyAbst_size() );
+}
+
+TEST_F(AbstractDataMemoryTest, 通常使用ユースケース)
+{
+    AbstDataMem_add_size( DummyAbst_size() );
+    
+    char* buf = (char*)malloc( AbstDataMem_alloc_size() );
+    
+    AbstDataMem adm = AbstDataMem_init( buf, sizeof(buf));
+    
+    DummyAbst da = (DummyAbst)AbstDataMem_get_data( adm, DummyAbst_size() );
+    
+    DummyAbst_init( da );
+    
+    EXPECT_EQ( da->a, 0);
+    EXPECT_EQ( da->b, 1);
+    EXPECT_FLOAT_EQ( da->c, 2.0f );
+    EXPECT_DOUBLE_EQ( da->d, 3.0 );
 }
 
 TEST_F(AbstractDataMemoryTest, 絶対成功テスト)
