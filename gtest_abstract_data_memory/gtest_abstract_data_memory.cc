@@ -10,6 +10,8 @@
 #include "../abstract_data_memory/abstract_data_memory.c"
 #include "gtest/gtest.h"
 
+#include "dummy_abstract_class.c"
+
 class AbstractDataMemoryTest : public ::testing::Test{
 protected:
     AbstractDataMemoryTest(){
@@ -19,9 +21,7 @@ protected:
     virtual void SetUp(){
     }
     virtual void TearDown(){
-        
     }
-
 };
 
 TEST_F(AbstractDataMemoryTest, 初期化テスト)
@@ -31,6 +31,13 @@ TEST_F(AbstractDataMemoryTest, 初期化テスト)
     AbstDataMem adm = AbstDataMem_init( buf, sizeof(buf) );
     
     EXPECT_EQ( adm->size, sizeof(buf) );
+}
+
+TEST_F(AbstractDataMemoryTest, サイズ計算テスト)
+{
+    AbstDataMem_add_size( DummyAbst_size() );
+    
+    EXPECT_EQ( AbstDataMem_alloc_size(), DummyAbst_size() );
 }
 
 TEST_F(AbstractDataMemoryTest, 絶対成功テスト)

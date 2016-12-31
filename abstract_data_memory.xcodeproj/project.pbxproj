@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B72844681E173A590085E137 /* dummy_abstract_class.c in Sources */ = {isa = PBXBuildFile; fileRef = B72844671E173A590085E137 /* dummy_abstract_class.c */; };
 		B7B477DC1E1659CA00BF4733 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = B7B477DB1E1659CA00BF4733 /* main.c */; };
 		B7B477DE1E1659CA00BF4733 /* abstract_data_memory.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = B7B477DD1E1659CA00BF4733 /* abstract_data_memory.1 */; };
 		B7B477ED1E1659F300BF4733 /* gtest_abstract_data_memory.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = B7B477EC1E1659F300BF4733 /* gtest_abstract_data_memory.1 */; };
@@ -39,6 +40,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B72844671E173A590085E137 /* dummy_abstract_class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dummy_abstract_class.c; sourceTree = "<group>"; };
+		B72844691E173A780085E137 /* dummy_abstract_class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dummy_abstract_class.h; sourceTree = "<group>"; };
 		B7B477D81E1659CA00BF4733 /* abstract_data_memory */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = abstract_data_memory; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B477DB1E1659CA00BF4733 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		B7B477DD1E1659CA00BF4733 /* abstract_data_memory.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = abstract_data_memory.1; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 				B7B477F31E165E1E00BF4733 /* gtest_main.a */,
 				B7B477F11E165A6500BF4733 /* gtest_abstract_data_memory.cc */,
 				B7B477EC1E1659F300BF4733 /* gtest_abstract_data_memory.1 */,
+				B72844671E173A590085E137 /* dummy_abstract_class.c */,
+				B72844691E173A780085E137 /* dummy_abstract_class.h */,
 			);
 			path = gtest_abstract_data_memory;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7B477F61E165F7900BF4733 /* gtest_abstract_data_memory.cc in Sources */,
+				B72844681E173A590085E137 /* dummy_abstract_class.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +332,7 @@
 				B7B477E31E1659CA00BF4733 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B7B477EE1E1659F300BF4733 /* Build configuration list for PBXNativeTarget "gtest_abstract_data_memory" */ = {
 			isa = XCConfigurationList;
@@ -334,6 +341,7 @@
 				B7B477F01E1659F300BF4733 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

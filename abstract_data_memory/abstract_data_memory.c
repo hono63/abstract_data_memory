@@ -20,3 +20,22 @@ AbstDataMem AbstDataMem_init( void* buf, size_t size )
     
     return adm;
 }
+
+// utility
+
+static size_t g_alloc_size = 0u;
+
+void    AbstDataMem_clear_alloc_size()
+{
+    g_alloc_size = 0u;
+}
+
+void    AbstDataMem_add_size( size_t data_size )
+{
+    g_alloc_size += data_size;
+}
+
+size_t  AbstDataMem_alloc_size()
+{
+    return g_alloc_size;
+}
