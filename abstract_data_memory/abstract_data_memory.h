@@ -13,8 +13,8 @@
 
 typedef struct abst_data_mem_s* AbstDataMem;
 
-AbstDataMem AbstDataMem_init( const void* buf, size_t buf_size );
-void* AbstDataMem_get_data( const AbstDataMem adm, size_t data_size );
+AbstDataMem AbstDataMem_init( void* buf, size_t buf_size );
+void* AbstDataMem_get_data( AbstDataMem adm, size_t data_size );
 
 // utility
 void    AbstDataMem_clear_alloc_size();

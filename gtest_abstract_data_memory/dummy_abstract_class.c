@@ -22,8 +22,10 @@ size_t DummyAbst_size()
 
 void DummyAbst_init( DummyAbst da )
 {
-    da->a = 0;
-    da->b = 1;
-    da->c = 2.0f;
-    da->d = 3.0;
+    if( da != NULL ){
+        da->a = 0;
+        da->b = 1;
+        da->c = 2.0f;
+        da->d = 3.0;
+    }
 }
