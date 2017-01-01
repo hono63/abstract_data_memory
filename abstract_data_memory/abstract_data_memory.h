@@ -9,7 +9,7 @@
 #ifndef abstract_data_memory_h
 #define abstract_data_memory_h
 
-#include "stdio.h"
+#include <stdio.h>
 
 typedef struct abst_data_mem_s* AbstDataMem;
 

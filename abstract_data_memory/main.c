@@ -7,12 +7,15 @@
 //
 
 #include <stdio.h>
+#include "abstract_data_memory.h"
 
 int main(int argc, const char * argv[])
 {
-
-    // insert code here...
-    printf( "Hello, World!\n" );
+    AbstDataMem_clear_alloc_size();
+    
+    char* buf = (char*)malloc( AbstDataMem_alloc_size() );
+    
+    AbstDataMem adm = AbstDataMem_init( buf, AbstDataMem_alloc_size() );
     
     return 0;
 
